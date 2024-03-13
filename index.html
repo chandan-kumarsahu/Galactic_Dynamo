@@ -14779,8 +14779,13 @@ $$ B_{\text{total}}(z, t) = \tilde{B}(r)\exp(-\gamma t) $$<p>where $\tilde{B}(r)
 <h3 id="3.1---Solver:-Crank-Nicholson">3.1 - Solver: Crank-Nicholson<a class="anchor-link" href="#3.1---Solver:-Crank-Nicholson">&#182;</a></h3><p>We use the Crank-Nicholson algorithm to solve the diffusion equation. It combines implicit and explicit schemes, resulting in a stable and accurate solution.</p>
 <p>A stencil of forward eluer method and crank-nicholson method are shown below:</p>
 <center>
-<font style="margin-left: 24em">Forward Euler Method: <font style="margin-left: 17em"> Crank-Nicholson:<font style="margin-left: 26em">
-<img src="euler.png" width="200" align="center"><font style="margin-left: 15em"><img src="cn.png" width="200" align="center">
+<font style="margin-left: 24em">
+Forward Euler Method: 
+<font style="margin-left: 17em">
+Crank-Nicholson:<font style="margin-left: 26em">
+<img title="a title" alt="Alt text" src="euler.png">
+<font style="margin-left: 15em">
+<img title="a title" alt="Alt text" src="cn.png">
 </center>
 <p>By averaging the values of variables at current and next time steps, it reduces numerical errors and suppresses oscillations.</p>
 <p>The method is highly stable, allowing for larger time steps compared to explicit methods, and is second-order accurate in time and space. This makes it well-suited for simulating heat diffusion processes with high accuracy and efficiency.</p>
@@ -14798,8 +14803,10 @@ $$ B_{\text{total}}(z, t) = \tilde{B}(r)\exp(-\gamma t) $$<p>where $\tilde{B}(r)
 <h3 id="3.2---Defining-the-grid">3.2 - Defining the grid<a class="anchor-link" href="#3.2---Defining-the-grid">&#182;</a></h3><h5 id="$%5Cstar$--Spatial-Grid-($z$)">$\star$  Spatial Grid ($z$)<a class="anchor-link" href="#$%5Cstar$--Spatial-Grid-($z$)">&#182;</a></h5><p>The size of a galactic disk typically ranges from around 10 kpc to 50 kpc. Our Milky way has a radius of ~40 kpc. Within this disk, there are thin and thick disks. The thin disk, where most of the younger stars reside, typically extends from the galactic center to about 100-1000 pc. Meanwhile, the thick disk, containing older stars and having a higher vertical velocity dispersion, can extend further out to ~3 kpc.</p>
 <p>Considering these typical values, we choose the thickness of our model galaxy to be ~200 pc.</p>
 <p>So, $z$ extends from -100 pc to +100 pc. For solving numerically, we normalize the spatial grid to -1 to 1, with a grid cell size of $dz = 0.01$.</p>
-<center><img src="Milky-way.jpg" width="500">
-<p><font>Figure: Schematic of the Milky Way galaxy</p>
+<center>
+<img title="a title" alt="Alt text" src="Milky-way.jpg">
+<br>
+<font>Figure: Schematic of the Milky Way galaxy
 </center>
 <h5 id="$%5Cstar$--Temporal-Grid-($t$)">$\star$  Temporal Grid ($t$)<a class="anchor-link" href="#$%5Cstar$--Temporal-Grid-($t$)">&#182;</a></h5><p>The typical variation of magnetic fields usually vary in millions of years. 
 However, the duration of simulation depends on the seed field, so we change this values and its binning according the the seed field. In general, we take 100 points within the temporal grid range.</p>
@@ -15689,6 +15696,29 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>So the value of magnetic decay rate or decay constant obtained for this case is $\gamma = -8.417 \times 10^{-3}$</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<hr><hr>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 </div>
 </div>
