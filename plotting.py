@@ -1,5 +1,24 @@
+import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
+
+
+def create_animation(B_array, z_values, t_values, filename='animation.gif', B_label='B(z)', z_label='z'):
+    fig, ax = plt.subplots()
+
+    def update(frame):
+        ax.clear()
+        ax.plot(z_values, B_array[:, frame])
+        ax.set_title(f"Time = {t_values[frame]:.2f}")
+        ax.set_xlabel(z_label)
+        ax.set_ylabel(B_label)
+        ax.set_xlim(z_values.min(), z_values.max())
+        ax.set_ylim(B_array.min(), B_array.max())
+
+    ani = animation.FuncAnimation(fig, update, frames=len(t_values), interval=100)
+
+    ani.save(filename, writer='pillow')
+    plt.close(fig)
 
 
 def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2):
