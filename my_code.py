@@ -133,5 +133,7 @@ def crank_nicolson_diffusion(x_min, x_max, t_max, dx, dt, Diff, init_cond, sourc
 # Pitch angle
 def get_B_and_pitch(Br, Bphi):
     B = np.sqrt(Br**2 + Bphi**2)
-    p = np.where(np.abs(Bphi)>1e-1, 180/np.pi*np.arctan(Br/Bphi), 90)
+    p = np.where(np.abs(Bphi)>1e-15, 180/np.pi*np.arctan(Br/Bphi), 90)
     return B, p
+
+
