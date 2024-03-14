@@ -17,3 +17,9 @@ Supervised by: Dr. Luke R. Chamandy, SPS, NISER
     1. Solver: Crank-Nicholson
     2. Defining the grid 
     3. Boundary conditions
+
+THE CODE
+1. Example 1 - Simplest case ($B_r>0$ and $B_\phi>0$ at all times)
+2. Example 2 - ($B_\phi>0$ at all times)
+3. Example 3 - Arbitrary seed field
+
