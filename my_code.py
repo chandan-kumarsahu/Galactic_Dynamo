@@ -4,7 +4,7 @@ import numpy as np
 
 """
 Get the matrices A and B for solving the diffusion equation using Crank-Nicolson method.
-This function is used for free boundary conditions.
+This function is used for vacuum boundary conditions.
 
 Parameters:
 - N: Number of spatial grid points
@@ -15,7 +15,7 @@ Returns:
 - B: Matrix B
 """
 
-def diff_matrix_free_boundary(N, sigma):
+def diff_matrix_vacuum_boundary(N, sigma):
     # Initialize matrices A and B with zeros
     A = [[0] * N for _ in range(N)]
     B = [[0] * N for _ in range(N)]
@@ -133,7 +133,17 @@ def crank_nicolson_diffusion(x_min, x_max, t_max, dx, dt, Diff, init_cond, sourc
 # Pitch angle
 def get_B_and_pitch(Br, Bphi):
     B = np.sqrt(Br**2 + Bphi**2)
-    p = np.where(np.abs(Bphi)>1e-15, 180/np.pi*np.arctan(Br/Bphi), 90)
+    p = np.zeros(Br.shape)
+    for i in range(Br.shape[0]):
+        for j in range(Br.shape[1]):
+            if Bphi[i, j]!=0:
+                p[i, j] = 180/np.pi*np.arctan(Br[i, j]/Bphi[i, j])
+            elif Br[i, j]>0:
+                p[i, j] = 90
+            elif Br[i, j]<0:
+                p[i, j] = -90
+            else:
+                p[i, j] = 0
     return B, p
 
 

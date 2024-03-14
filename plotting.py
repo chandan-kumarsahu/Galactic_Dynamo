@@ -124,7 +124,7 @@ def plot_pitch(time_grid, spatial_grid, B, pitch):
     for i in (range(0, len(time_grid), int(len(time_grid)/5))):
         plt.plot(spatial_grid[1:-1], pitch[1:-1, i], label=f'time = {time_grid[i]:.1f}')
     plt.xlabel(r'$z$ (normalized to 100 pc)')
-    plt.ylabel(r'Pitch angle ($p_B$)')
+    plt.ylabel(r'Pitch angle $p_B$ (in degrees)')
     plt.title(r'Variation of pitch angle with time')
     plt.grid()
     plt.legend()
@@ -132,7 +132,7 @@ def plot_pitch(time_grid, spatial_grid, B, pitch):
     # Create imshow plot
     plt.subplot(2, 2, 4)
     plt.contourf(*np.meshgrid(spatial_grid[1:-1], time_grid), pitch.T[:, 1:-1], 40, cmap='Spectral_r')
-    plt.colorbar(label=r'Pitch angle ($p_B$)')
+    plt.colorbar(label=r'Pitch angle $p_B$ (in degrees)')
     plt.title('Variation of pitch angle with time')
     plt.xlabel(r'$z$ (normalized to 100 pc)')
     plt.ylabel('Time (Myr)')
@@ -144,11 +144,13 @@ def plot_pitch(time_grid, spatial_grid, B, pitch):
 def plot_decay(time_grid, B_mid, m, c):
     # Plot the log of magnetic field strength at midplane and the slope of the logplot
     plt.figure(figsize=(6, 4))
-    plt.plot(time_grid[-50:], B_mid[-50:], 'r.', label=r'Slope ($\gamma$) = {:.3e}'.format(m))
     plt.plot(time_grid, B_mid, 'b-')
+    # plot another line with the slope and intercept m and c
+    plt.plot(time_grid[-50:], m*time_grid[-50:] + c, 'r:', linewidth=3, label=r'Slope ($\gamma$) = {:.3e}'.format(m))
     plt.xlabel('Time (Myr)')
     plt.ylabel('log$(B_{total})$ at midplane')
     plt.title(r'Magnetic field strength at midplane')
+    # plt.yscale('log')
     plt.grid()
     plt.legend()
     plt.tight_layout()
