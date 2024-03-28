@@ -21,7 +21,7 @@ def create_animation(B_array, z_values, t_values, filename='animation.gif', B_la
     plt.close(fig)
 
 
-def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2):
+def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2, global_title):
 
     plt.figure(figsize=(11, 3.5))
     plt.subplot(121)
@@ -36,7 +36,7 @@ def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2):
     plt.ylabel(r'$B_{\phi}$')
     plt.title(title2)
 
-    plt.suptitle('INITIAL CONDITIONS FOR MAGNETIC FIELD COMPONENTS')
+    plt.suptitle(global_title)
     plt.tight_layout(pad=1)
 
 
