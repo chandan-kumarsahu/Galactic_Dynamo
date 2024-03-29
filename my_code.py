@@ -147,3 +147,59 @@ def get_B_and_pitch(Br, Bphi):
     return B, p
 
 
+
+
+def matrix_A(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
+    # return a 2N x 2N matrix with the given terms in each block of the matrix
+    A = np.zeros((2*N, 2*N))
+    for i in range(N):
+        A[i, i] = a1
+        A[i, i+N] = a2
+        A[i+N, i] = a3
+        A[i+N, i+N] = a4
+    for i in range(N-1):
+        A[i, i+1] = b1
+        A[i, i+N+1] = b2
+        A[i+N, i+1] = b3
+        A[i+N, i+N+1] = b4
+        A[i+1, i] = c1
+        A[i+1, i+N] = c2
+        A[i+N+1, i] = c3
+        A[i+N+1, i+N] = c4
+    return A
+
+def matrix_B(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
+    B = np.zeros((2*N, 2*N))
+    for i in range(N):
+        B[i, i] = a1
+        B[i, i+N] = a2
+        B[i+N, i] = a3
+        B[i+N, i+N] = a4
+    for i in range(N-1):
+        B[i, i+1] = b1
+        B[i, i+N+1] = b2
+        B[i+N, i+1] = b3
+        B[i+N, i+N+1] = b4
+        B[i+1, i] = c1
+        B[i+1, i+N] = c2
+        B[i+N+1, i] = c3
+        B[i+N+1, i+N] = c4
+    return B
+
+
+
+def crank_nicolson_mod(N_x, N_t, init_cond_Br, init_cond_Bphi, A, B):
+
+    # Initialize temperature array
+    U = np.zeros((2*N_x, N_t))
+
+    # Initial condition
+    for i in range(N_x):
+        U[i, 0] = init_cond_Br[i]
+        U[N_x+i, 0] = init_cond_Bphi[i]
+
+    for j in range(1, N_t):
+        U[:, j] = np.dot(np.linalg.inv(A), np.dot(B, U[:, j - 1]))
+
+    return U
+
