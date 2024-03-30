@@ -2,6 +2,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+##########################################################################################################
+
 """
 Get the matrices A and B for solving the diffusion equation using Crank-Nicolson method.
 This function is used for vacuum boundary conditions.
@@ -36,6 +38,8 @@ def diff_matrix_vacuum_boundary(N, sigma):
             B[i][i + 1] = sigma
 
     return A, B
+
+
 
 
 """
@@ -78,7 +82,6 @@ def diff_matrix_isolated_boundary(N, sigma):
     B[-1][-1] = 2 - sigma
 
     return A, B
-
 
 
 
@@ -130,7 +133,20 @@ def crank_nicolson_diffusion(x_min, x_max, t_max, dx, dt, Diff, init_cond, sourc
     return Temp, np.array(x), np.array(t)
 
 
-# Pitch angle
+
+
+"""
+Calculation of the pitch angle
+
+Parameters:
+- Br: Radial component of the magnetic field
+- Bphi: Azimuthal component of the magnetic field
+
+Returns:
+- B: Total magnetic field
+- p: Pitch angle
+"""
+
 def get_B_and_pitch(Br, Bphi):
     B = np.sqrt(Br**2 + Bphi**2)
     p = np.zeros(Br.shape)
@@ -148,6 +164,19 @@ def get_B_and_pitch(Br, Bphi):
 
 
 
+
+"""
+Get the matrices A and B for solving the diffusion equation using Crank-Nicolson method.
+This function is used for vacuum boundary conditions.
+
+Parameters:
+- N: Number of spatial grid points
+- a1, b1, ... etc: Coefficients of the matrix
+
+Returns:
+- A: Matrix A
+- B: Matrix B
+"""
 
 def matrix_A(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
     # return a 2N x 2N matrix with the given terms in each block of the matrix
@@ -188,6 +217,22 @@ def matrix_B(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
 
 
 
+
+"""
+Solve 1D diffusion equation using Crank-Nicolson method with modified matrices.
+
+Parameters:
+- N_x: Number of spatial grid points
+- N_t: Number of time grid points
+- init_cond_Br: Initial condition for Br
+- init_cond_Bphi: Initial condition for Bphi
+- A: Coefficient matrix A
+- B: Coefficient matrix B
+
+Returns:
+- U: Magnetic field distribution over space and time
+"""
+
 def crank_nicolson_mod(N_x, N_t, init_cond_Br, init_cond_Bphi, A, B):
 
     # Initialize temperature array
@@ -202,4 +247,7 @@ def crank_nicolson_mod(N_x, N_t, init_cond_Br, init_cond_Bphi, A, B):
         U[:, j] = np.dot(np.linalg.inv(A), np.dot(B, U[:, j - 1]))
 
     return U
+
+
+
 
