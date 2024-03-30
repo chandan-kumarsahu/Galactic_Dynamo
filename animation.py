@@ -20,7 +20,7 @@ z = np.linspace(-1, 1, 101)
 
 # Constants and parameters
 eta_T = 3.48e-3    # magnetic diffusivity
-alpha = 0.02    # alpha effect
+alpha = 0.01    # alpha effect
 Omega = 0.4
 q = 0.1
 t_max = 2000     # total simulation time
@@ -78,5 +78,5 @@ def update(frame):
 animation = FuncAnimation(fig, update, frames=len(t), interval=50, blit=True)
 
 # Display the animation
-animation.save('ani_1.gif', writer='pillow')
+animation.save('ani_2.gif', writer='pillow')
 # plt.show()
