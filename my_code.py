@@ -1,6 +1,7 @@
 # Importing required libraries
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.optimize import curve_fit
 
 ##########################################################################################################
 
@@ -54,7 +55,6 @@ Returns:
 - A: Matrix A
 - B: Matrix B
 """
-
 def diff_matrix_isolated_boundary(N, sigma):
     # Initialize matrices A and B with zeros
     A = [[0] * N for _ in range(N)]
@@ -104,7 +104,6 @@ Returns:
 - x: Spatial grid
 - t: Time grid
 """
-
 def crank_nicolson_diffusion(x_min, x_max, t_max, dx, dt, Diff, init_cond, source_term, boundary):
 
     alpha = Diff * dt / (dx**2)
@@ -146,7 +145,6 @@ Returns:
 - B: Total magnetic field
 - p: Pitch angle
 """
-
 def get_B_and_pitch(Br, Bphi):
     B = np.sqrt(Br**2 + Bphi**2)
     p = np.zeros(Br.shape)
@@ -175,11 +173,8 @@ Parameters:
 
 Returns:
 - A: Matrix A
-- B: Matrix B
 """
-
-def matrix_A(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
-    # return a 2N x 2N matrix with the given terms in each block of the matrix
+def matrix(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
     A = np.zeros((2*N, 2*N))
     for i in range(N):
         A[i, i] = a1
@@ -196,24 +191,6 @@ def matrix_A(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
         A[i+N+1, i] = c3
         A[i+N+1, i+N] = c4
     return A
-
-def matrix_B(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
-    B = np.zeros((2*N, 2*N))
-    for i in range(N):
-        B[i, i] = a1
-        B[i, i+N] = a2
-        B[i+N, i] = a3
-        B[i+N, i+N] = a4
-    for i in range(N-1):
-        B[i, i+1] = b1
-        B[i, i+N+1] = b2
-        B[i+N, i+1] = b3
-        B[i+N, i+N+1] = b4
-        B[i+1, i] = c1
-        B[i+1, i+N] = c2
-        B[i+N+1, i] = c3
-        B[i+N+1, i+N] = c4
-    return B
 
 
 
@@ -232,7 +209,6 @@ Parameters:
 Returns:
 - U: Magnetic field distribution over space and time
 """
-
 def crank_nicolson_mod(N_x, N_t, init_cond_Br, init_cond_Bphi, A, B):
 
     # Initialize temperature array
@@ -251,3 +227,79 @@ def crank_nicolson_mod(N_x, N_t, init_cond_Br, init_cond_Bphi, A, B):
 
 
 
+"""
+Function to find the local maxima of a curve.
+
+Parameters:
+- x: x values
+- y: y values
+
+Returns:
+- x_maxima: x values of the local maxima
+- y_maxima: y values of the local maxima
+"""
+def find_local_maxima(x, y):
+    x = x[100:]
+    y = y[100:]
+    x_maxima = []
+    y_maxima = []
+    for i in range(1, len(y) - 1):
+        if y[i] > y[i - 1] and y[i] > y[i + 1]:
+            x_maxima.append(x[i])
+            y_maxima.append(y[i])
+    return np.array(x_maxima), np.array(y_maxima)
+
+
+
+
+"""
+Function to find the decay rate of a curve.
+
+Parameters:
+- x: x values
+- y: y values
+
+Returns:
+- slope: Decay rate of the curve
+"""
+def get_decay_rate(x, y):
+    x, y = find_local_maxima(x, y)
+    y = np.log(y)
+    slope, intercept = np.polyfit(x, y, 1)
+    return slope
+
+
+
+
+"""
+Function to find roots of a function using bisection method.
+
+Parameters:
+- f: Function for which roots are to be found
+- a: Lower bound of the interval
+- b: Upper bound of the interval
+- eps: Desired accuracy
+
+Returns:
+- c: Root of the function
+"""
+def bisection(f, a, b, eps):
+
+    if f(a)*f(b) == 0.0:
+        if f(a)==0.0:
+            return a
+        else:
+            return b
+
+    c = (a+b)/2
+    counter = 1
+    while np.abs(f(c)) > eps: # checking if the accuracy is achieved
+        c = (a+b)/2
+        if (f(a)*f(c)) <= 0.0: # Check if the root is properly bracketted
+            b = c
+        else:
+            a = c
+        if counter > 100:
+            print('Maximum iterations reached.')
+            break
+    return c

@@ -2,7 +2,13 @@ import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import numpy as np
 
+from my_code import *
 
+##########################################################################################################
+
+"""
+Create an animation of the magnetic field evolution in time.
+"""
 def create_animation(B_array, z_values, t_values, filename='animation.gif', B_label='B(z)', z_label='z'):
     fig, ax = plt.subplots()
 
@@ -21,6 +27,10 @@ def create_animation(B_array, z_values, t_values, filename='animation.gif', B_la
     plt.close(fig)
 
 
+
+"""
+Plot the initial conditions of the magnetic field.
+"""
 def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2, global_title):
 
     plt.figure(figsize=(11, 3.5))
@@ -42,29 +52,21 @@ def plot_init_cond(z, init_cond_Br, init_cond_Bphi, title1, title2, global_title
 
 """
 Plot the solution in both 1D and Heatmap format.
-
-Parameters:
-- time_grid: Time grid
-- spatial_grid: Spatial grid
-- solution: Solution of the diffusion equation
-
-Returns:
-- Makes the plots
 """
-
-def plot_diff(time_grid, spatial_grid, solution_r, solution_phi):
+def plot_diff(time_grid, spatial_grid, solution_r, solution_phi, D):
 
     # Create 2D plots
     plt.figure(figsize=(12, 8))
     plt.subplot(2, 2, 1)
+    plt.suptitle('Diffusion of Magnetic field with Dynamo number D = '+str(D))
+
     for i in (range(0, len(time_grid), int(len(time_grid)/5))):
         plt.plot(spatial_grid, solution_r[:, i], label=f'time = {time_grid[i]:.1f}')
     plt.xlabel(r'$z$ (normalized to 100 pc)')
     plt.ylabel(r'Magnetic Field Strength ($B_r$)')
     plt.title('Diffusion of Magnetic field in radial direction')
-    # plt.ylim(np.min(solution_r), np.max(solution_r))
     plt.grid()
-    plt.legend()
+    plt.legend(loc='upper right')
 
     # Create imshow plot
     plt.subplot(2, 2, 2)
@@ -82,9 +84,8 @@ def plot_diff(time_grid, spatial_grid, solution_r, solution_phi):
     plt.xlabel(r'$z$ (normalized to 100 pc)')
     plt.ylabel(r'Magnetic Field Strength ($B_\phi$)')
     plt.title(r'Diffusion of Magnetic field in azimuthal direction')
-    # plt.ylim(np.min(solution_phi), np.max(solution_phi))
     plt.grid()
-    plt.legend()
+    plt.legend(loc='upper right')
 
     # Create imshow plot
     plt.subplot(2, 2, 4)
@@ -97,6 +98,9 @@ def plot_diff(time_grid, spatial_grid, solution_r, solution_phi):
 
 
 
+"""
+Plot the pitch angle of the magnetic field.
+"""
 def plot_pitch(time_grid, spatial_grid, B, pitch):
 
     # Create 2D plots
@@ -141,6 +145,9 @@ def plot_pitch(time_grid, spatial_grid, B, pitch):
 
 
 
+"""
+Plot the decay of the magnetic field at the midplane.
+"""
 def plot_decay(time_grid, B_mid, m, c):
     # Plot the log of magnetic field strength at midplane and the slope of the logplot
     plt.figure(figsize=(6, 4))
@@ -150,7 +157,19 @@ def plot_decay(time_grid, B_mid, m, c):
     plt.xlabel('Time (Myr)')
     plt.ylabel('log$(B_{total})$ at midplane')
     plt.title(r'Magnetic field strength at midplane')
-    # plt.yscale('log')
     plt.grid()
     plt.legend()
     plt.tight_layout()
+
+
+
+"""
+Plot the decay of the magnetic field at the midplane in the alpha-Omega dynamo model.
+"""
+def plot_aO_decay(t, B_mid, x_max, y_max):
+    plt.figure(figsize=(6, 4))
+    plt.plot(t, B_mid)
+    plt.plot(x_max, y_max, 'ro')
+    plt.xlabel('Time')
+    plt.ylabel('Magnetic field')
+    plt.title('Magnetic field at the midplane')
