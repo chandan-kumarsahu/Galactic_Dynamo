@@ -20,9 +20,9 @@ z = np.linspace(-1, 1, 101)
 
 # Constants and parameters
 eta_T = 3.48e-3    # magnetic diffusivity
-alpha = 3e-5    # alpha effect
+alpha = 4e-5    # alpha effect
 Omega = 40
-q = -0.5
+q = 0.5
 t_max = 2000     # total simulation time
 z_min = -1.0     # minimum thickness of the disc
 z_max = 1.0     # thickness of the disc
@@ -57,7 +57,7 @@ line_bphi, = ax2.plot([], [], color='red', label='$B_{\phi}$')
 
 
 # Set the super title
-fig.suptitle(r'Galactic magnetic field evolution of $B_r$ and $B_{\phi}$ for Dynamo number $D = $'+str(1.725e7*alpha))
+fig.suptitle(r'Galactic magnetic field evolution of $B_r$ and $B_{\phi}$ for Dynamo number $D = $'+str(-1.725e7*alpha))
 
 # Set the axis limits
 ax1.set_xlim(z_min, z_max)
@@ -91,6 +91,6 @@ animation = FuncAnimation(fig, update, frames=len(t), interval=50, blit=True)
 plt.tight_layout()
 
 # Display the animation
-animation.save('ani_1.gif', writer='pillow')
+animation.save('ani_2.gif', writer='pillow')
 
 # plt.show()
