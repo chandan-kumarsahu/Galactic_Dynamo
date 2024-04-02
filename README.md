@@ -25,7 +25,7 @@ THE CODE
 2. Example 2 - ($B_\phi>0$ at all times)
 3. Example 3 - Arbitrary seed field
 
-## Chapter 1
+## Chapter 2
 1. Problem Statement
 2. Theory
     1. Revisiting the mean-field induction equation
