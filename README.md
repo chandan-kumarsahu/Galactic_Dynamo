@@ -7,6 +7,8 @@ Submitted by: <u>Chandan Kumar Sahu</u>, Integrated MSc. SPS batch 19
 Supervised by: Dr. Luke R. Chamandy, SPS, NISER
 
 # Contents
+
+## Chapter 1
 1. Problem Statement
 2. Theory
     1. The mean-field induction equation
@@ -23,3 +25,15 @@ THE CODE
 2. Example 2 - ($B_\phi>0$ at all times)
 3. Example 3 - Arbitrary seed field
 
+## Chapter 1
+1. Problem Statement
+2. Theory
+    1. Revisiting the mean-field induction equation
+    2. Dynamo number
+4. Numerical Solution to Galactic magnetic Fields with $\alpha-\Omega$ approximation
+    1. Solver: Crank-Nicholson
+    2. Grid and boundary conditions
+
+THE CODE
+1. Example 1 - Decaying fields
+1. Example 2 - Growing fields
