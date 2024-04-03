@@ -5,6 +5,13 @@ from scipy.optimize import curve_fit
 
 ##########################################################################################################
 
+# CONSTANTS
+KM = 1e3
+PC = 3.086e16
+MYR = 1e6*365*24*3600
+
+##########################################################################################################
+
 """
 Get the matrices A and B for solving the diffusion equation using Crank-Nicolson method.
 This function is used for vacuum boundary conditions.
@@ -284,7 +291,9 @@ Returns:
 - c: Root of the function
 """
 def bisection(f, a, b, eps):
-
+    counter = 1
+    COUNT = []
+    VAL = []
     if f(a)*f(b) == 0.0:
         if f(a)==0.0:
             return a
@@ -292,8 +301,8 @@ def bisection(f, a, b, eps):
             return b
 
     c = (a+b)/2
-    counter = 1
     while np.abs(f(c)) > eps: # checking if the accuracy is achieved
+
         c = (a+b)/2
         if (f(a)*f(c)) <= 0.0: # Check if the root is properly bracketted
             b = c
@@ -302,4 +311,8 @@ def bisection(f, a, b, eps):
         if counter > 100:
             print('Maximum iterations reached.')
             break
-    return c
+        counter += 1
+        COUNT.append(counter)
+        VAL.append(c)
+
+    return c, COUNT, VAL
