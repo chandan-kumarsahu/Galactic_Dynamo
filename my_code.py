@@ -177,15 +177,17 @@ This function is used for vacuum boundary conditions.
 Parameters:
 - N: Number of spatial grid points
 - a1, b1, ... etc: Coefficients of the matrix
+- alpha: Alpha effect
+- dalpha_dt: Derivative of alpha with respect to time
 
 Returns:
 - A: Matrix A
 """
-def matrix(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4):
+def mod_matrix(N, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, alpha, dalpha_dt):
     A = np.zeros((2*N, 2*N))
     for i in range(N):
         A[i, i] = a1
-        A[i, i+N] = a2
+        A[i, i+N] = (dalpha_dt[i]/2 - b2*alpha[i])*a2
         A[i+N, i] = a3
         A[i+N, i+N] = a4
     for i in range(N-1):
@@ -270,7 +272,7 @@ Returns:
 - slope: Decay rate of the curve
 """
 def get_decay_rate(x, y):
-    x, y = find_local_maxima(x, y)
+    # x, y = find_local_maxima(x, y)
     y = np.log(y)
     slope, intercept = np.polyfit(x, y, 1)
     return slope
@@ -314,5 +316,6 @@ def bisection(f, a, b, eps):
         counter += 1
         COUNT.append(counter)
         VAL.append(c)
+        print(np.round(c,6), round(f(c),6))
 
     return c, COUNT, VAL

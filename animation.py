@@ -7,10 +7,10 @@ from plotting import *
 
 
 def init_cond_Br(x):
-    return (1-x**2) #(1-x**2)*np.cos(2*np.pi*x)
+    return -(1-x**2) #(1-x**2)*np.cos(2*np.pi*x)
 
 def init_cond_Bphi(x):
-    return -(1-x**2)
+    return (1-x**2)
 
 def source_term(x, t):
     return 0
@@ -19,16 +19,22 @@ z = np.linspace(-1, 1, 101)
 
 
 # Constants and parameters
-eta_T = 3.48e-2                     # magnetic diffusivity in (100pc)^2/Myr
-alpha = 50                          # alpha effect in km/s
-Omega = 110*MYR*KM/(1000*PC)        # angular velocity, converted from km/s/kpc to 1/Myr
+h = 7                               # 100pc
+eta_T = 1.3#3.48e-2/h**2                     # magnetic diffusivity in (100pc)^2/Myr
+Omega = 100*MYR*KM/(1000*PC)        # angular velocity, converted from km/s/kpc to 1/Myr
 q = 0.98                            # shear parameter
-t_max = 400                         # total simulation time
+t_max = 100                         # total simulation time
 z_min = -1.0                        # minimum thickness of the disc
 z_max = 1.0                         # thickness of the disc
 dt = t_max/200                      # time step
 dz = 0.01                           # spatial step in z direction
-alpha = alpha*1e3*MYR/(100*PC)      # alpha effect, converted from km/s to 100pc/Myr
+alpha_0 = 4/h#10*1e3*MYR/(100*PC)      # alpha effect, converted from km/s to 100pc/Myr
+
+print('eta', eta_T, '\t',  'alpha',alpha_0, '\t', 'omega', Omega)
+print('Rw', -q*Omega*h**2/eta_T)
+print('Ra', alpha_0*h/eta_T)
+print('Dynamo number ', -alpha_0*q*Omega*h**3/eta_T**2)
+
 
 # Spatial grid
 z = np.linspace(z_min, z_max, int((z_max - z_min) / dz) + 1)
@@ -36,10 +42,12 @@ t = np.linspace(0, t_max, int(t_max / dt) + 1)
 
 # Coefficients for the matrix A and B
 rho = eta_T*dt/(2*dz**2)
-sigma = alpha*dt/(2*dz)
+sigma = dt/(2*dz)
+alpha = alpha_0*np.sin(np.pi*z/2)
+dalpha_dt = np.gradient(alpha, z)
 
-A = matrix(len(z), 1+2*rho, -sigma, q*Omega*dt/2, 1+2*rho, -rho, sigma, 0, -rho, -rho, 0, 0, -rho)
-B = matrix(len(z), 1-2*rho, sigma, -q*Omega*dt/2, 1-2*rho, rho, -sigma, 0, rho, rho, 0, 0, rho)
+A = mod_matrix(z, 1+2*rho, 1, q*Omega*dt/2, 1+2*rho, -rho, sigma, 0, -rho, -rho, 0, 0, -rho, alpha, dalpha_dt)
+B = mod_matrix(z, 1-2*rho, -1, -q*Omega*dt/2, 1-2*rho, rho, -sigma, 0, rho, rho, 0, 0, rho, alpha, dalpha_dt)
 
 # Solve the diffusion equation in radial direction
 solution = crank_nicolson_mod(len(z), len(t), init_cond_Br(z), init_cond_Bphi(z), A, B)
@@ -58,7 +66,7 @@ line_bphi, = ax2.plot([], [], color='red', label='$B_{\phi}$ (in $\mu B$)')
 
 
 # Set the super title
-fig.suptitle(r'Galactic magnetic field evolution of $B_r$ and $B_{\phi}$ for Dynamo number $D = $'+str(np.round(-alpha*q*Omega*1**3/eta_T**2, 4)))
+fig.suptitle(r'Galactic magnetic field evolution of $B_r$ and $B_{\phi}$ for Dynamo number $D = $'+str(np.round(-alpha_0*q*Omega*h**3/eta_T**2, 4)))
 
 # Set the axis limits
 ax1.set_xlim(z_min, z_max)
@@ -96,4 +104,4 @@ plt.tight_layout()
 # Display the animation
 animation.save('ani_1.gif', writer='pillow')
 
-# plt.show()
+plt.show()
