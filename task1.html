@@ -14573,86 +14573,34 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     init_mathjax();
     </script>
     <!-- End of mathjax configuration --></head>
+    <body class="jp-Notebook left-sidebar is-preloaded" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-
-<body class="jp-Notebook left-sidebar is-preloaded" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="page-wrapper">
-  <section id="header" class="wrapper">
-
-    <!-- Logo -->
-      <div id="logo">
-        <h1><a href="index.html">Galactic Dynamo</a></h1>
-      </div>
-
-    <!-- Nav -->
-      <nav id="nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li class="current"><a href="task1.html">Task 1</a></li>
-          <li><a href="task2.html">Task 2</a></li>
-          <li><a href="task3.html">Task 3</a></li>
-          <li><a href="ref.html">References</a></li>
-        </ul>
-      </nav>
-
-  </section>
+      <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="page-wrapper">
+        <section id="header" class="wrapper">
+      
+          <!-- Logo -->
+            <div id="logo">
+              <h1><a href="index.html">Galactic Dynamo</a></h1>
+            </div>
+      
+          <!-- Nav -->
+            <nav id="nav">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="current"><a href="task1.html">Task 1</a></li>
+                <li><a href="task2.html">Task 2</a></li>
+                <li><a href="task3.html">Task 3</a></li>
+                <li><a href="ref.html">References</a></li>
+              </ul>
+            </nav>
+      
+        </section>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><font color="blue"><b><h1 style="font-size:4em; font-family:serif"><center>GALACTIC DYNAMO</center></h1></b></p>
-<p>This project is a part of the term project given in course P464 Plamsa Physics and Magnetohydrodynamics taught in Spring 2024 at NISER Bhubaneswar.</p>
-<p>Submitted by: <u>Chandan Kumar Sahu</u>, Integrated MSc. SPS batch 19</p>
-<p>Supervised by: Dr. Luke R. Chamandy, SPS, NISER</p>
-<p><hr><hr></p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><font ><b><h1 style="font-size:3em;"><center>CHAPTER 1</center></h1></b></p>
-<h1 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h1><ol>
-<li>Problem Statement</li>
-<li>Theory<ol>
-<li>The mean-field induction equation</li>
-<li>Solving in cylindrical coordinates</li>
-<li>Calculation of total magnetic field magnitude and pitch angle</li>
-<li>Magnetic decay constant</li>
-</ol>
-</li>
-<li>Numerical solution to Galactic Magnetic Fields<ol>
-<li>Solver: Crank-Nicholson</li>
-<li>Defining the grid </li>
-<li>Boundary conditions</li>
-</ol>
-</li>
-</ol>
-<p>THE CODE</p>
-<ol>
-<li>Example 1 - Simplest case ($B_r&gt;0$ and $B_\phi&gt;0$ at all times)</li>
-<li>Example 2 - ($B_\phi&gt;0$ at all times)</li>
-<li>Example 3 - Arbitrary seed field</li>
-</ol>
-<p><hr><hr></p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+  <br>
 <h1 id="1.1---Problem-Statement">1.1 - Problem Statement<a class="anchor-link" href="#1.1---Problem-Statement">&#182;</a></h1><p>Solve the diffusion equation in the z-direction.</p>
 <ul>
 <li>Explore the evolution of the magnetic field magnitude and of the exponential decay rate.</li>
@@ -15811,7 +15759,54 @@ class="
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<hr>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We solved the coupled-diffusion equation in 1-D for $B_r$ and $B_{\phi}$ to get the final solutions from some arbitrary example seed fields.</p>
+<p>For each of the solutions above, we made the contour plots and observed that the magnetic field in both $B_r$ and $B_{\phi}$ decayed with time.</p>
+<p>We then plotted the variation of the magnetc fielf at the midplane and captured the variation of the midplane magnitude with time. We obsserved that all the fields, irrespective of the seed decay, and the decay rate is a constant for all the cases, which is found to be $-8.417 \times 10^{-2}$ per Myrs.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><hr><hr></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 </div>
 </div>
