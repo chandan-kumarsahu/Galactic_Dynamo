@@ -5,3 +5,5 @@ This project is a part of the term project given in course P464 Plamsa Physics a
 Submitted by: <u>Chandan Kumar Sahu</u>, Integrated MSc. SPS batch 19
 
 Supervised by: Dr. Luke R. Chamandy, SPS, NISER
+
+Click here to access the website - https://chandan-kumarsahu.github.io/Galactic_Dynamo/
